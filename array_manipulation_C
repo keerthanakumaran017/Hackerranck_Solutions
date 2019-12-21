@@ -1,0 +1,33 @@
+#include<stdio.h>
+int main()
+{
+    long long int n,q,max=0,x=0;
+    scanf("%llu %llu",&n,&q);
+int *arr;
+arr=(long long int *)malloc((n+1)*(sizeof(long long int)));
+for(int i=1;i<=n;i++)
+{
+    *(arr+i)=0;
+}
+long long int a,b,k;
+for(int i=1;i<=q;i++)
+{
+    scanf("%llu %llu %llu",&a,&b,&k);
+    *(arr+a)+=k;
+    if(b+1<=n)
+    {
+        *(arr+b+1)-=k;
+    }
+
+}
+for(int i=1;i<=n;i++)
+{
+    x+=*(arr+i);
+    if(max<x)
+    {
+        max=x;
+    }
+}
+printf("%llu ",max);
+return 0;
+}
