@@ -1,0 +1,44 @@
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.regex.*;
+
+public class Solution {
+    public static void main(String []args)
+    {
+    Scanner sc=new Scanner(System.in);
+    int a=sc.nextInt();
+    int[] s=new int[100];
+    int count=0;
+    int sock_count=0;
+    for(int i=0;i<a;i++)
+    {
+        s[i]=sc.nextInt();
+        
+    }
+    for(int i=0;i<a;i++)
+    {
+        count=0;
+        
+        for(int j=i+1;j<a;j++)
+        {
+            if(s[j]==s[i] && s[i] !=-1 && s[j]!=-1)
+            {
+                count++;
+                s[j]=-1;
+            }
+        }
+        if(s[i]!=-1)
+        {
+        count+=1;
+        s[i]=-1;
+        sock_count+=count/2;
+        
+        }
+    }
+        System.out.println(sock_count);
+    }
+}

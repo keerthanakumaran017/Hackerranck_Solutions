@@ -1,0 +1,40 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<math.h>
+#include<string.h>
+#include<stdbool.h>
+int main()
+{
+   long long int a,arr[100000],count=1,j=0,s=0,c=0;
+    bool visited[100000];
+    scanf("%llu",&a);
+    for(int i=0;i<a;i++)
+    {
+        visited[i]=false;
+    }
+    for(int i=0;i<a;i++)
+    {
+        scanf("%llu ",&arr[i]);
+        
+    }
+    for(int i=0;i<a;i++)
+    {
+         
+            j=i;
+            count=0;
+            while(!(visited[j]))
+            {
+                    visited[j]=true;
+                    
+                    j=arr[j]-1;
+                    count++;
+
+            }
+            if(count !=0)
+            {
+          s+=count-1;
+            }
+         
+    }
+   printf("%llu ",s);
+}
