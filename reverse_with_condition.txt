@@ -1,5 +1,8 @@
 #include <stdio.h>
-
+//reverses the word in a sentence if it has even length of letters.
+//for exapmle 
+//input:She is a doctor
+//output:she si a rotcod
 #include<string.h>
 
 int main() 
