@@ -1,0 +1,72 @@
+#include <stdio.h>
+
+#include<string.h>
+
+int main() 
+{
+char str[1000];
+	
+int count=0,k=0;
+	
+scanf("%[^\n]s",str);
+
+for(int j=0;j<=strlen(str);j++)
+
+{
+    
+if(str[j]==' ' || str[j]=='\0')
+    
+{
+        
+        
+if(count%2==0)
+        
+{
+           
+for(int i=j-1;str[i]!=' ' && str[i]!='\0';i--)
+           
+{
+               
+printf("%c",str[i]);
+           
+}
+           
+printf(" ");
+        
+}
+        
+else
+        
+{
+            
+for(int i=j-count;str[i]!=' ' && str[i]!='\0';i++)
+            
+{
+                
+printf("%c",str[i]);
+            
+}
+            
+printf(" ");
+        
+}
+        
+count=0;
+    
+}
+    
+else
+    
+{
+        
+        
+count++;
+    
+}
+    
+
+}
+	
+return 0;
+
+}

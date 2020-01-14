@@ -1,0 +1,130 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct node
+{
+    int data;
+    struct node *left,*right;
+};
+typedef struct node NODE;
+NODE *root=NULL;
+int search(int num, NODE *root)
+{
+    if(root==NULL)
+    {
+        return 0;
+    }
+    if(num==root->data)
+    {
+        return 1;
+    }
+    if(num<root->data)
+    {
+        return search(num,root->left);
+    }
+    if(num>root->data)
+    {
+        return search(num,root->right);
+    }
+    
+}
+
+struct node *insert(NODE *root,int data)
+{
+    
+    NODE *newnode;
+    if(root==NULL)
+    {
+        
+        newnode=(NODE*)malloc(sizeof(NODE));
+        newnode->data=data;
+        newnode->left=newnode->right=NULL;
+        root=newnode;
+    }
+    else if(data<root->data)
+    {
+        root->left=insert(root->left,data);
+    }
+    else
+    {
+        root->right=insert(root->right,data);
+    }
+   return root; 
+}
+void inorder(NODE *root)
+{
+    if(root!=NULL)
+    {
+    inorder(root->left);
+    printf("%d ",root->data);
+    inorder(root->right);
+    }
+}
+void preorder(NODE *root)
+{
+    if(root!=NULL)
+    {
+    
+    printf("%d ",root->data);
+    preorder(root->left);
+    preorder(root->right);
+    }
+}
+void postorder(NODE *root)
+{
+    if(root!=NULL)
+    {
+    
+    
+    postorder(root->left);
+    postorder(root->right);
+    printf("%d ",root->data);
+    }
+}
+int getHeight(struct node* root)
+ {
+        if(root==NULL)
+            return -1;
+        int l=getHeight(root->left);
+        int r=getHeight(root->right);
+    
+        if(l>r)
+            return (l+1);
+        else
+            return (r+1);
+    
+}
+int main()
+{
+    int data;
+    printf("Enter the data in space seperated values and mention the end as -1:\n");
+  while(1)
+  {
+    scanf("%d ",&data);
+    if(data==-1)
+    {
+        break;
+    }
+    root=insert(root,data);
+    
+  }
+  printf("the inorder traversal is:\n");
+    inorder(root);
+    printf("\n");
+    printf("the preorder traversal is:\n");
+    preorder(root);
+    printf("\n");
+    printf("the postorder traversal is:\n");
+    postorder(root);
+    printf("\nenter the element to search in the binary search tree:");
+    int search_num;
+    scanf("%d",&search_num);
+    if(search(search_num,root))
+    {
+        printf("%d found",search_num);
+    }
+    else
+    {
+        printf("%d not found",search_num);
+    }
+printf("Height of the BST is: %d",getHeight(root));
+}
