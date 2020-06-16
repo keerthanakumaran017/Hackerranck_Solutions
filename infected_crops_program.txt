@@ -1,0 +1,97 @@
+/*Input:
+3 3
+W G W
+W G G
+W I W
+ Output:
+D G W
+D G G
+D D D
+*/
+
+#include <stdio.h>
+#include<stdlib.h>
+#include<string.h>
+struct index
+{
+    int ival;
+    int jval;
+};
+    void infect(int row,int col,char **mat ,int i,int j)
+{
+   
+            if(i-1>=0 && j<col && mat[i-1][j]=='W')
+            {
+                mat[i-1][j]='I';
+                infect(row,col,mat,i-1,j);
+            }
+            if(j-1>=0 && i<row && mat[i][j-1]=='W')
+            {
+                mat[i][j-1]='I';
+                infect(row,col,mat,i,j-1);
+            }
+            if(j+1<col && i<row && mat[i][j+1]=='W')
+            {
+                mat[i][j+1]='I';
+                infect(row,col,mat,i,j+1);
+            }
+            if(i+1<row && j<col && mat[i+1][j]=='W')
+            {
+                mat[i+1][j]='I';
+                infect(row,col,mat,i+1,j);
+            }
+}
+int main() {
+    char **mat,cc,temp,s[100];
+    
+    int row,col,move=0,mov=0;
+    struct index arr[100]; 
+    scanf("%d %d\n",&row,&col);
+    mat=malloc(row*sizeof(mat));
+    for (int i=0; i<row; i++)
+    {
+        mat[i] = malloc(col * sizeof *mat[i]);
+    }
+
+    for(int i=0;i<row;i++)
+    {
+        
+            scanf("%[^\n]s",s);
+            printf("%s ",s);
+            move=0;
+            for(int j=0;j<strlen(s);j++){
+                if(s[j]=='W' ||s[j]=='G' || s[j]=='I')
+                {
+                    mat[i][move]=s[j];
+                    if(mat[i][move]=='I')
+                    {
+                    arr[mov].ival=i;
+                    arr[mov].jval=move;
+                    mov++;
+                    }
+                    move++;
+                }
+            }
+            scanf("%c",&temp);
+    }
+    printf("\n-----------------\n");
+    
+    for(int i=0;i<mov;i++){
+        infect(row,col,mat,arr[i].ival,arr[i].jval);
+    }
+    
+    for(int i=0;i<row;i++)
+    {
+        for(int j=0;j<col;j++)
+        {
+           if(mat[i][j]=='I')
+           {
+               mat[i][j]='D';
+           }
+           printf("%c ",mat[i][j]);
+        }
+        printf("\n");
+    }
+    
+    return 0;
+}
